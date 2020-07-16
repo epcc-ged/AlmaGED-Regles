@@ -1,0 +1,7 @@
+rule "FusionPasserelleSUDOC"
+  when
+	 merge
+  then
+	replace MARC.XXX excluding "039,099,319,493,494,529,539,609,619,629,659,669,679,689,719,966,991,995,939,970"
+	replace MARC."035" when MARC."035"."a" does not contain "SIDEPCC" excluding MARC."035"("9","#")
+end
