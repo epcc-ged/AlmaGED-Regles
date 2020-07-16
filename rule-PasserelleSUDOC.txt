@@ -1,0 +1,28 @@
+rule "PasserelleSUDOC"
+when
+ (TRUE)
+then
+  addControlField "009.PPN"
+  addSystemNumber "035.a" from "001" prefixed by "009"
+  prefix "035.a" with "(PPN)" if (exists "035.9.sudoc")
+  prefix "4**.0" with "(PPN)"
+  prefix "4**.1" with "001(PPN)"
+  removeControlField "009"
+  removeField "PPN"
+  removeField "035" if (exists "035.a.(OCoLC)*")
+  replaceContents "2**.*.\u0098" with "<<"
+  replaceContents "2**.*.\u009c" with ">>"
+  replaceContents "4**.*.\u0098" with "<<"
+  replaceContents "4**.*.\u009c" with ">>"
+  replaceContents "5**.*.\u0098" with "<<"
+  replaceContents "5**.*.\u009c" with ">>"
+  replaceContents "6**.*.\u0098" with "<<"
+  replaceContents "6**.*.\u009c" with ">>"
+  replaceContents "7**.*.\u0098" with "<<"
+  replaceContents "7**.*.\u009c" with ">>"
+  changeField "035" to "999" if (not exists "035.a.(PPN)*")
+  changeField "999" to "035" if (not exists "035.a.(PPN)*")
+  copyField "035" to "903.a" if (exists "035.a.(PPN)*")
+  removeField "902" if (exists "902.9.Exl")
+  removeField "902" if (exists "902.9.sudoc")
+end
