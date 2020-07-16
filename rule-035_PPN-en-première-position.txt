@@ -1,0 +1,8 @@
+rule "035_PPN en première position"
+when
+(TRUE)
+then
+changeField "035" to "902" if (not exists "035.a.(PPN)*")
+changeField "902" to "035" if (not exists "035.a.(PPN)*")
+copyField "930.e" to "939.a"
+end
