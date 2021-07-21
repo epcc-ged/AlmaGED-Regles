@@ -1,0 +1,8 @@
+rule "Recopie 035 $a(PPN) en 903"
+when
+(exists "035.a.(PPN)*")
+then
+removeField "903"
+copyField "035" to "903.a" if (exists "035.a.(PPN)*")
+removeField "903" if (exists "903.9")
+end
