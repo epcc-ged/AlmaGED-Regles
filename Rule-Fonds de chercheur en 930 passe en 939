@@ -1,0 +1,6 @@
+rule "Fonds de chercheur en 930 passe en 939"
+when
+(exists "930.e")
+then
+copyField "930.e" to "939.a"
+end
